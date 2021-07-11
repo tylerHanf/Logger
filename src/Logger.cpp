@@ -1,4 +1,5 @@
 #include "Logger.h"
+#include <iostream>
 
 static const char* logPath;
 static std::FILE* fp;
@@ -49,55 +50,84 @@ void Logger::Log(const char* msg, bool toFile, va_list args) {
 
 		else if (formatModifier) {
 
-			if (*msg == 'd') {
+			switch (*msg) {
+			case 'd':
+			{
 				int i = va_arg(args, int);
 				fprintf(o_stream, "%d", i);
+				break;
 			}
 
-			else if (*msg == 'f') {
+			case 'f':
+			{
 				double f = va_arg(args, double);
 				fprintf(o_stream, "%f", f);
+				break;
 			}
 
-			else if (*msg == 'c') {
+			case 'c':
+			{
 				int c = va_arg(args, int);
 				fprintf(o_stream, "%c", c);
+				break;
 			}
 
-			else if (*msg == '2') {
-				Vec2 vec = va_arg(args, Vec2);
-				Log_Vec2(vec, o_stream);
+			case 's':
+			{
+				char* s = va_arg(args, char*);
+				fprintf(o_stream, "%s", s);
+				break;
 			}
 
-			else if (*msg == '3') {
-				Vec3 vec = va_arg(args, Vec3);
-				Log_Vec3(vec, o_stream);
+			case '2':
+			{
+				Vec2 vec2 = va_arg(args, Vec2);
+				Log_Vec2(vec2, o_stream);
+				break;
 			}
 
-			else if (*msg == '4') {
-				Vec4 vec = va_arg(args, Vec4);
-				Log_Vec4(vec, o_stream);
+			case '3':
+			{
+				Vec3 vec3 = va_arg(args, Vec3);
+				Log_Vec3(vec3, o_stream);
+				break;
 			}
 
-			else if (*msg == 'm') {
-				Mat3 mat = va_arg(args, Mat3);
-				Log_Mat3(mat, o_stream);
+			case '4':
+			{
+				Vec4 vec4 = va_arg(args, Vec4);
+				Log_Vec4(vec4, o_stream);
+				break;
 			}
 
-			else if (*msg == 'M') {
-				Mat4 mat = va_arg(args, Mat4);
-				Log_Mat4(mat, o_stream);
+			case 'm':
+			{
+				Mat3 mat3 = va_arg(args, Mat3);
+				Log_Mat3(mat3, o_stream);
+				break;
 			}
 
-			else if (*msg == 'q') {
+			case 'M':
+			{
+				Mat4 mat4 = va_arg(args, Mat4);
+				Log_Mat4(mat4, o_stream);
+				break;
+			}
+
+			case 'q':
+			{
 				Quaternion q = va_arg(args, Quaternion);
 				Log_Quat(q, o_stream);
+				break;
 			}
 
-			else {
+			default:
+			{
 				fprintf(o_stream, "\nERROR: unrecognizable printf format specifier\n");
+				break;
 			}
 
+			}
 			formatModifier = false;
 		}
 
