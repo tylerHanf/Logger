@@ -153,16 +153,16 @@ void Logger::Log_Vec4(const Vec4& vec, std::FILE* o_stream) {
 }
 
 void Logger::Log_Mat3(const Mat3& mat, std::FILE* o_stream) {
-	fprintf(o_stream, "[ %f, %f, %f\n", mat[0][0], mat[0][1], mat[0][2]);
-	fprintf(o_stream, "  %f, %f, %f\n", mat[1][0], mat[1][1], mat[1][2]);
-	fprintf(o_stream, "  %f, %f, %f ]\n", mat[2][0], mat[2][1], mat[2][2]);
+	fprintf(o_stream, "\n[ %f, %f, %f\n", mat[0][0], mat[1][0], mat[2][0]);
+	fprintf(o_stream, "  %f, %f, %f\n", mat[0][1], mat[1][1], mat[2][1]);
+	fprintf(o_stream, "  %f, %f, %f ]\n", mat[0][2], mat[1][2], mat[2][2]);
 }
 
 void Logger::Log_Mat4(const Mat4& mat, std::FILE* o_stream) {
-	fprintf(o_stream, "[ %f, %f, %f\n", mat[0][0], mat[0][1], mat[0][2]);
-	fprintf(o_stream, "  %f, %f, %f\n", mat[1][0], mat[1][1], mat[1][2]);
-	fprintf(o_stream, "  %f, %f, %f\n", mat[2][0], mat[2][1], mat[2][2]);
-	fprintf(o_stream, "  %f, %f, %f ]\n", mat[3][0], mat[3][1], mat[3][2]);
+	fprintf(o_stream, "\n[ %f, %f, %f %f\n", mat[0][0], mat[1][0], mat[2][0], mat[3][0]);
+	fprintf(o_stream, "  %f, %f, %f %f\n", mat[0][1], mat[1][1], mat[2][1], mat[3][1]);
+	fprintf(o_stream, "  %f, %f, %f %f\n", mat[0][2], mat[1][2], mat[2][2], mat[3][2]);
+	fprintf(o_stream, "  %f, %f, %f %f]\n", mat[0][3], mat[1][3], mat[2][3], mat[3][3]);
 }
 
 void Logger::Log_Quat(const Quaternion& quat, std::FILE* o_stream) {
