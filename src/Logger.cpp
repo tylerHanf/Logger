@@ -33,12 +33,7 @@ void Logger::InitLog(const char* logPath) {
 *		-d = int
 *       -f = double
 *       -c = char
-*       -2 = Vec2
-*       -3 = Vec3
-*       -4 = Vec4
-*       -m = Mat3
-*       -M = Mat4
-*       -q = Quaternion
+*       -s = string
 */
 void Logger::Log(const char* msg, bool toFile, va_list args) {
 
@@ -79,48 +74,6 @@ void Logger::Log(const char* msg, bool toFile, va_list args) {
 				break;
 			}
 
-			case '2':
-			{
-				Vec2 vec2 = va_arg(args, Vec2);
-				Log_Vec2(vec2, o_stream);
-				break;
-			}
-
-			case '3':
-			{
-				Vec3 vec3 = va_arg(args, Vec3);
-				Log_Vec3(vec3, o_stream);
-				break;
-			}
-
-			case '4':
-			{
-				Vec4 vec4 = va_arg(args, Vec4);
-				Log_Vec4(vec4, o_stream);
-				break;
-			}
-
-			case 'm':
-			{
-				Mat3 mat3 = va_arg(args, Mat3);
-				Log_Mat3(mat3, o_stream);
-				break;
-			}
-
-			case 'M':
-			{
-				Mat4 mat4 = va_arg(args, Mat4);
-				Log_Mat4(mat4, o_stream);
-				break;
-			}
-
-			case 'q':
-			{
-				Quaternion q = va_arg(args, Quaternion);
-				Log_Quat(q, o_stream);
-				break;
-			}
-
 			default:
 			{
 				fprintf(o_stream, "\nERROR: unrecognizable printf format specifier\n");
@@ -139,33 +92,3 @@ void Logger::Log(const char* msg, bool toFile, va_list args) {
 	}
 	fprintf(o_stream, "\n");
 }
-
-void Logger::Log_Vec2(const Vec2& vec, std::FILE* o_stream) {
-	fprintf(o_stream, "[ %f, %f ]\n", vec[0], vec[1]);
-}
-
-void Logger::Log_Vec3(const Vec3& vec, std::FILE* o_stream) {
-	fprintf(o_stream, "[ %f, %f, %f ]\n", vec[0], vec[1], vec[2]);
-}
-
-void Logger::Log_Vec4(const Vec4& vec, std::FILE* o_stream) {
-	fprintf(o_stream, "[ %f, %f, %f, %f ]\n", vec[0], vec[1], vec[2], vec[3]);
-}
-
-void Logger::Log_Mat3(const Mat3& mat, std::FILE* o_stream) {
-	fprintf(o_stream, "\n[ %f, %f, %f\n", mat[0][0], mat[1][0], mat[2][0]);
-	fprintf(o_stream, "  %f, %f, %f\n", mat[0][1], mat[1][1], mat[2][1]);
-	fprintf(o_stream, "  %f, %f, %f ]\n", mat[0][2], mat[1][2], mat[2][2]);
-}
-
-void Logger::Log_Mat4(const Mat4& mat, std::FILE* o_stream) {
-	fprintf(o_stream, "\n[ %f, %f, %f %f\n", mat[0][0], mat[1][0], mat[2][0], mat[3][0]);
-	fprintf(o_stream, "  %f, %f, %f %f\n", mat[0][1], mat[1][1], mat[2][1], mat[3][1]);
-	fprintf(o_stream, "  %f, %f, %f %f\n", mat[0][2], mat[1][2], mat[2][2], mat[3][2]);
-	fprintf(o_stream, "  %f, %f, %f %f]\n", mat[0][3], mat[1][3], mat[2][3], mat[3][3]);
-}
-
-void Logger::Log_Quat(const Quaternion& quat, std::FILE* o_stream) {
-	fprintf(o_stream, "R: %f, I: [ %f, %f, %f ]\n", quat.r, quat.i[0], quat.i[1], quat.i[2]);
-}
-
