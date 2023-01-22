@@ -17,7 +17,7 @@ void Logger::LogFile(const char* msg, ...) {
 }
 
 void Logger::InitLog(const char* logPath) {
-	fopen_s(&fp, logPath, "w");
+	fp = fopen(logPath, "w");
 	if (fp != NULL) {
 		printf("Initialized Logger\n");
 	}
