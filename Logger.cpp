@@ -15,17 +15,18 @@ void Logger::SetLogDest(int destFlags)
 	toConsole = destFlags & DEST_CONSOLE;
 }
 
-void Logger::InitLog(const char* logPath, LogLevel level, int destFlags) {
+void Logger::InitLog(const std::string& logPath, LogLevel level, int destFlags) {
 	SetLogDest(destFlags);
 
-	fopen_s(&fp, logPath, "w");
-	if (fp != NULL) {
-		LOG_INFO("Initialized Logger\n");
+	if (logPath.size())
+	{
+		fopen_s(&fp, logPath.c_str(), "w");
+		if (fp == NULL)
+		{
+			LOG_WARN("Failed to create log file, bad file path\n");
+		}
 	}
-
-	else {
-		LOG_WARN("Failed to create log file, bad file path\n");
-	}
+	LOG_INFO("Initialized Logger\n");
 }
 
 void Logger::SetLogLevel(uint32_t allowedSev)

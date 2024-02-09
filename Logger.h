@@ -43,7 +43,7 @@ class Logger {
 public:
 
 	static void Log(const std::string& sev_msg, const std::string& filename, const std::string& funcName, int lineNum, LogLevel level, const char* msg, ...);
-	static void InitLog(const char* logPath, LogLevel level=SEV_INFO, int destFlags=DEST_CONSOLE);
+	static void InitLog(const std::string& logPath, LogLevel level=SEV_INFO, int destFlags=DEST_CONSOLE);
 	static void SetLogDest(int destFlag);
 	static void SetLogLevel(uint32_t level);
 
