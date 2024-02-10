@@ -23,10 +23,10 @@ void Logger::InitLog(const std::string& logPath, LogLevel level, int destFlags) 
 		fopen_s(&fp, logPath.c_str(), "w");
 		if (fp == NULL)
 		{
-			LOG_WARN("Failed to create log file, bad file path\n");
+			LOG_WARN("Failed to create log file, bad file path");
 		}
 	}
-	LOG_INFO("Initialized Logger\n");
+	LOG_INFO("Initialized Logger");
 }
 
 void Logger::SetLogLevel(uint32_t allowedSev)
@@ -111,7 +111,6 @@ void Logger::Log(const std::string& sev_msg, const std::string& filename, const 
 
 		++msg;
 	}
-	sprintf(&buff[next], "\n");
 
 	if (toConsole)
 	{
